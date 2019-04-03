@@ -1,0 +1,11 @@
+@keyframes err {
+  from {
+    background-color: rgba(255, 43, 43, 0.3);
+  }
+  50% {
+    background-color: rgba(255, 43, 43, 0.7);
+  }
+  to {
+    background-color: rgba(255, 43, 43, 0.3);
+  }
+}

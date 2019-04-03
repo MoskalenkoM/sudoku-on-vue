@@ -1,0 +1,33 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  line-height: 1.6;
+  height: 100%;
+}
+
+body {
+  min-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+li,
+button {
+  -webkit-font-smoothing: auto;
+}
