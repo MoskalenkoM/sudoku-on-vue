@@ -40,15 +40,9 @@ export default {
       // проверка на совпадение
       this.matchData(data);
       // изменение значения в store
-      if (this.matchIs) {
-        return;
+      if (!this.matchIs) {
+        this.inVuex(data);
       }
-      // this.changeBlocks({
-      //   block: data.block,
-      //   item: data.item,
-      //   value: data.value
-      // });
-      this.inVuex(data);
     },
     matchData(data) {
       // хэндлер проверки на совпадение
@@ -56,7 +50,10 @@ export default {
         if (data.block === itBlock) {
           for (let it in this.blocks[itBlock]) {
             if (data.value === this.blocks[itBlock][it]) {
-              // console.log("уже есть в", it, "пришёл:", data.item);
+              if ((data.value === "") & (this.blocks[itBlock][it] === "")) {
+                return;
+              }
+              console.log("уже есть в", it, "пришёл:", data.item);
               this.matchIs = true;
               this.matchBlockFirst = it;
               this.matchBlockSecond = data.item;

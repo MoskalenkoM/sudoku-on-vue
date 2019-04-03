@@ -116,8 +116,8 @@ export default {
           for (let it in state.blocks[data.block]) {
             if (it === data.item) {
               state.blocks[data.block][it] = data.value;
-              // console.log('значение пришло в store:', data.value, 'блок:', itBlock);
-              // console.log('значение обновилось в store на:', state.blocks[data.block][it]);
+              // console.log('пришло в store:', data.value, ',', 'item:', data.item);
+              // console.log('обновилось в store на:', state.blocks[data.block][it], ',', 'item:', it);
             }
           }
         }
