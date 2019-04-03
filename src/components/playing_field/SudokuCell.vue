@@ -1,7 +1,7 @@
 <template lang="pug">
   input.cell(
     :class="[className, matchingFirst ? 'err' : '', matchingSecond ? 'err' : '']"
-    :value="currentValue"
+    :value="val"
     @input="enterNumber"
   )
 </template>
@@ -32,20 +32,26 @@ export default {
   },
   data() {
     return {
-      currentValue: this.val
+      // currentValue: this.val,
+      count: 0
     };
   },
   methods: {
     enterNumber(e) {
       const val = e.target.value[e.target.value.length - 1];
       if (this.validNumb(val)) {
-        this.currentValue = "";
-        this.currentValue = val;
-      } else if (e.inputType === "deleteContentBackward") {
-        this.currentValue = "";
+        // this.currentValue = "";
         e.target.value = "";
+        // this.currentValue = val;
+        e.target.value = val;
+        this.sendCurrentData(e);
+      } else if (e.inputType === "deleteContentBackward") {
+        // this.currentValue = "";
+        e.target.value = "";
+        this.sendCurrentData(e);
       } else {
-        e.target.value = this.currentValue;
+        // e.target.value = this.currentValue;
+        e.target.value = "";
       }
     },
     validNumb(v) {
@@ -61,17 +67,30 @@ export default {
         v === "9" ||
         false;
       return checkVal;
-    }
-  },
-  watch: {
-    currentValue() {
+    },
+    sendCurrentData(e) {
+      this.count += 1;
+      // console.log("количество обращений в store:", this.count);
+      // console.log("актуальное значение:", e.target.value);
       this.$emit("sendData", {
         block: this.className,
         item: this.items,
-        value: this.currentValue
+        value: e.target.value
       });
     }
   }
+  // watch: {
+  //   currentValue() {
+  //     this.count += 1;
+  //     console.log("количество обращений в store:", this.count);
+  //     console.log("актуальное значение:", this.currentValue);
+  //     this.$emit("sendData", {
+  //       block: this.className,
+  //       item: this.items,
+  //       value: this.currentValue
+  //     });
+  //   }
+  // }
 };
 </script>
 

@@ -58,12 +58,14 @@ export default {
               this.matchBlockFirst = it;
               this.matchBlockSecond = data.item;
               // this.blocks[itBlock][data.item] = data.value;
+              data.value = "";
+              this.inVuex(data);
               setTimeout(() => {
                 this.matchIs = false;
                 this.matchBlockFirst = "";
                 this.matchBlockSecond = "";
                 // this.blocks[itBlock][data.item] = "";
-              }, 3000);
+              }, 1500);
             }
           }
         }
