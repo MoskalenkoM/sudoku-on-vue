@@ -72,6 +72,7 @@ export default {
       this.count += 1;
       // console.log("количество обращений в store:", this.count);
       // console.log("актуальное значение:", e.target.value);
+      // console.log(this.items);
       this.$emit("sendData", {
         block: this.className,
         item: this.items,
@@ -102,7 +103,7 @@ export default {
   margin: auto;
   border: none;
   text-align: center;
-  transition: background-color 1s linear;
+  transition: background-color 0.5s linear;
 }
 
 .a,
