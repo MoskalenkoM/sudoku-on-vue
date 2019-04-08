@@ -1,6 +1,6 @@
 {
-  "name": "simple-sudoku-2",
-  "description": "Simple sudoku 2",
+  "name": "sudoku",
+  "description": "Sudoku",
   "version": "1.0.0",
   "author": "Maxim Moskalenko",
   "license": "MIT",

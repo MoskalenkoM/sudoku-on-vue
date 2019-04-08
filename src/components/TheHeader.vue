@@ -1,5 +1,5 @@
 <template lang="pug">
-  header.header Simple sudoku
+  header.header Sudoku
 </template>
 
 <script>

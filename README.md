@@ -1,8 +1,8 @@
-# Simple sudoku
+# Sudoku
 
 ## The build for start development environment
 
-### This build for simple-sudoku
+### This build for sudoku
 
 ---
 

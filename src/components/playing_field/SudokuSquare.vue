@@ -39,11 +39,11 @@ export default {
       changeBlocks: "changeBlocks"
     }),
     updateData(data) {
-      // проверка на совпадение
+      // проверка совпадений
       this.matchData(data, this.blocks);
       this.matchLines(data, this.lines);
       this.matchColumns(data, this.columns);
-      // изменение значения в store
+      // изменение значений в store
       if (!this.matchIs) {
         this.inVuex(data);
         this.createLines();

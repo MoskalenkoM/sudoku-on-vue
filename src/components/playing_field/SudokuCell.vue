@@ -32,7 +32,6 @@ export default {
   },
   data() {
     return {
-      // currentValue: this.val,
       count: 0
     };
   },
@@ -40,17 +39,13 @@ export default {
     enterNumber(e) {
       const val = e.target.value[e.target.value.length - 1];
       if (this.validNumb(val)) {
-        // this.currentValue = "";
         e.target.value = "";
-        // this.currentValue = val;
         e.target.value = val;
         this.sendCurrentData(e);
       } else if (e.inputType === "deleteContentBackward") {
-        // this.currentValue = "";
         e.target.value = "";
         this.sendCurrentData(e);
       } else {
-        // e.target.value = this.currentValue;
         e.target.value = "";
       }
     },
@@ -70,9 +65,6 @@ export default {
     },
     sendCurrentData(e) {
       this.count += 1;
-      // console.log("количество обращений в store:", this.count);
-      // console.log("актуальное значение:", e.target.value);
-      // console.log(this.items);
       this.$emit("sendData", {
         block: this.className,
         item: this.items,
@@ -80,18 +72,6 @@ export default {
       });
     }
   }
-  // watch: {
-  //   currentValue() {
-  //     this.count += 1;
-  //     console.log("количество обращений в store:", this.count);
-  //     console.log("актуальное значение:", this.currentValue);
-  //     this.$emit("sendData", {
-  //       block: this.className,
-  //       item: this.items,
-  //       value: this.currentValue
-  //     });
-  //   }
-  // }
 };
 </script>
 
