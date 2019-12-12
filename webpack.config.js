@@ -1,72 +1,68 @@
 /* eslint global-require: "off" */
 
-const path = require('path');
-const webpack = require('webpack');
+const path = require("path");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
-  entry: './src/main.js',
+  mode: process.env.NODE_ENV,
+  entry: "./src/main.js",
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    path: path.resolve(__dirname, "./dist"),
+    publicPath: "/dist/",
+    filename: "build.js"
   },
+  plugins: [new VueLoaderPlugin()],
   module: {
     rules: [
       {
-        enforce: 'pre',
+        enforce: "pre",
         test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
+        loader: "eslint-loader",
         exclude: /node_modules/,
         options: {
-          formatter: require('eslint-friendly-formatter')
+          formatter: require("eslint-friendly-formatter")
         }
       },
       {
-        test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader']
+        test: /\.pug$/,
+        loader: "pug-plain-loader"
       },
-      // {
-      //   test: /\.(woff|woff2)$/,
-      //   use: {
-      //     loader: 'file-loader',
-      //     options: {
-      //       name: 'fonts/[name].[ext]'
-      //     }
-      //   }
-      // },
+      {
+        test: /\.(css|postcss)$/,
+        use: ["vue-style-loader", "css-loader", "postcss-loader"]
+      },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {},
-          // other vue-loader options go here
-          postcss: [
-            require('postcss-nested')(),
-            require('postcss-media-minmax')(),
-            require('postcss-custom-properties')(),
-            require('autoprefixer')()
-          ]
-        }
+        loader: "vue-loader"
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]?[hash]"
+        }
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "fonts/[name].[ext]"
+          }
+        }
       }
-      // {
-      //   test: /\.(png|jpg|gif|svg)$/,
-      //   loader: 'file-loader',
-      //   options: {
-      //     name: '[name].[ext]?[hash]'
-      //   }
-      // }
     ]
   },
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.esm.js'
+      vue$: "vue/dist/vue.esm.js"
     },
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ["*", ".js", ".vue", ".json"]
   },
   devServer: {
     historyApiFallback: true,
@@ -76,26 +72,5 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: process.env.NODE_ENV === "production" ? "eval-sourcemap" : false
 };
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map';
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ]);
-}
